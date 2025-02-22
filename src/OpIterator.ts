@@ -14,7 +14,12 @@ export default class Iterator {
   hasNext(): boolean {
     return this.peekLength() < Infinity;
   }
-
+  /**
+   * 函数允许调用者逐步处理和应用多个编辑操作，维护了操作的状态（索引和偏移量），确保了操作按顺序正确执行。
+   * 1. index控制处理哪个操作。
+   * 2. offset控制在当前操作中处理到哪里。
+   * 「了解当前操作至那个字符，有可能这个字符存在一个操作中间，此时需要将一个操作拆成两个」
+   */
   next(length?: number): Op {
     if (!length) {
       length = Infinity;
